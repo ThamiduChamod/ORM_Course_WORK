@@ -7,13 +7,20 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 public class AccountDAOImpl implements AccountDAO {
-    private static FactoryConfiguration factory;
+    FactoryConfiguration factoryConfiguration = FactoryConfiguration.getInstance();
 
     @Override
     public boolean save(Account account) {
+        Session session = factoryConfiguration.getSession();
+        try {
+            Transaction transaction = session.beginTransaction();
+            session.save(account);
+            transaction.commit();
+            session.close();
+            return true;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
-//        try {
-//        }
-        return false;
     }
 }

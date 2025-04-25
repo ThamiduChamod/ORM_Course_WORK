@@ -11,8 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="672.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ProgramView">
+<AnchorPane prefHeight="672.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse71.orm.the_serenity_mental_health_therapy_center.controller.ProgramController">
    <children>
       <VBox layoutX="20.0" layoutY="20.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -30,7 +29,7 @@
                                     <Insets left="50.0" />
                                  </HBox.margin>
                               </Label>
-                              <Label fx:id="lblCustomerId" layoutX="10.0" layoutY="15.0" maxWidth="1.7976931348623157E308" prefHeight="18.0" text="1" HBox.hgrow="ALWAYS">
+                              <Label fx:id="programIdLbl" layoutX="10.0" layoutY="15.0" maxWidth="1.7976931348623157E308" prefHeight="18.0" text="1" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="Calibri" size="14.0" />
                                  </font>
@@ -50,7 +49,7 @@
                                     <Insets left="50.0" />
                                  </HBox.margin>
                               </Label>
-                              <TextField fx:id="txtName" promptText="customer" style="-fx-background-color: #fff; -fx-border-color: #111; -fx-border-width: 0 0 1px 0;" HBox.hgrow="ALWAYS">
+                              <TextField fx:id="nameText" promptText="customer" style="-fx-background-color: #fff; -fx-border-color: #111; -fx-border-width: 0 0 1px 0;" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="Calibri" size="14.0" />
                                  </font>
@@ -67,7 +66,7 @@
                                     <Insets left="50.0" />
                                  </HBox.margin>
                               </Label>
-                              <TextField fx:id="txtNic" promptText="000000000000" style="-fx-background-color: #fff; -fx-border-color: #111; -fx-border-width: 0 0 1px 0;" HBox.hgrow="ALWAYS">
+                              <TextField fx:id="durationText" promptText="000000000000" style="-fx-background-color: #fff; -fx-border-color: #111; -fx-border-width: 0 0 1px 0;" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="Calibri" size="14.0" />
                                  </font>
@@ -84,7 +83,7 @@
                                     <Insets left="50.0" />
                                  </HBox.margin>
                               </Label>
-                              <TextField fx:id="txtEmail" promptText="customer@gmail.com" style="-fx-background-color: #fff; -fx-border-color: #111; -fx-border-width: 0 0 1px 0;" HBox.hgrow="ALWAYS">
+                              <TextField fx:id="feeText" promptText="customer@gmail.com" style="-fx-background-color: #fff; -fx-border-color: #111; -fx-border-width: 0 0 1px 0;" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="Calibri" size="14.0" />
                                  </font>
@@ -104,7 +103,7 @@
                                  </HBox.margin>
                               </Button>
                               <Button mnemonicParsing="false" text="Button" />
-                              <Button mnemonicParsing="false" text="Button" />
+                              <Button mnemonicParsing="false" onAction="#saveBtnOnAction" text="Button" />
                            </children>
                            <VBox.margin>
                               <Insets top="200.0" />
