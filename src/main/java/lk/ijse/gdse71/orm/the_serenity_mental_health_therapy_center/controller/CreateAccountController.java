@@ -1,12 +1,24 @@
 package lk.ijse.gdse71.orm.the_serenity_mental_health_therapy_center.controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import lk.ijse.gdse71.orm.the_serenity_mental_health_therapy_center.bo.BOFactory;
 import lk.ijse.gdse71.orm.the_serenity_mental_health_therapy_center.bo.custom.AccountBO;
 import lk.ijse.gdse71.orm.the_serenity_mental_health_therapy_center.dto.AccountDTO;
+import at.favre.lib.crypto.bcrypt.BCrypt;
 
-public class CreateAccountController {
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
+
+public class CreateAccountController implements Initializable {
     public Label userIdLbl;
     public TextField nameText;
     public TextField nicText;
@@ -16,11 +28,17 @@ public class CreateAccountController {
     public PasswordField confirmPassswordText;
     public Button registerBtn;
     public ComboBox jobCmb;
+    public AnchorPane createAcountAnchorPane;
+    public RadioButton adminRBtn;
+    public RadioButton userRBtn;
 
 
     AccountBO accountBO = (AccountBO) BOFactory.getInstance().getBO(BOFactory.BOType.ACCOUNT);
 
     public void registerBtnClicked(ActionEvent event) {
+
+        String password = BCrypt.withDefaults().hashToString(13, passwordText.getText().toCharArray());
+
 
         String name = nameText.getText();
         String nic = nicText.getText();
@@ -38,6 +56,7 @@ public class CreateAccountController {
         boolean isValidNic =nic.matches(nicPattern);
         boolean isValidEmail = email.matches(emailPattern);
         boolean isValidPhone = phone.matches(phonePattern);
+        boolean isSame = passwordText.getText().equals(confirmPassswordText);
 
 
         if (!isValidName){
@@ -53,7 +72,14 @@ public class CreateAccountController {
             emailText.setStyle(emailText.getStyle() + ";-fx-text-fill: red;");
         }else emailText.setStyle(emailText.getStyle() + ";-fx-text-fill: black;");
 
-        if (isValidName && isValidEmail && isValidPhone && isValidNic){
+        if (isSame){
+
+            confirmPassswordText.setStyle(confirmPassswordText.getStyle() + ";-fx-text-fill: black;");
+        }else confirmPassswordText.setStyle(confirmPassswordText.getStyle() + ";-fx-text-fill: red;");
+
+        if (isValidName && isValidEmail && isValidPhone && isValidNic && isSame ){
+//            String pass = BCrypt.withDefaults().hashToString(5, passwordText.getText().toCharArray());
+//            System.out.println(pass);
 
             AccountDTO AccountDTO = new AccountDTO(
                     userIdLbl.getText(),
@@ -62,7 +88,7 @@ public class CreateAccountController {
                     emailText.getText(),
                     phoneText.getText(),
                     jobCmb.getSelectionModel().getSelectedItem().toString(),
-                    passwordText.getText()
+                    password
             );
 
             try {
@@ -78,5 +104,52 @@ public class CreateAccountController {
 
         }
 
+    }
+
+    public void loginPageOnAction(ActionEvent event) {
+        loadPage("/view/loginView.fxml",createAcountAnchorPane);
+    }
+
+    private void loadPage (String link , AnchorPane anchorPane) {
+        try {
+            AnchorPane load = FXMLLoader.load(getClass().getResource(link));
+            anchorPane.getChildren().clear();
+            anchorPane.getChildren().add(load);
+        } catch (IOException e) {
+            new Alert(Alert.AlertType.ERROR,"Can't load this page").showAndWait();
+        }
+
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        loadNextId();
+        getValue();
+        clearTxet();
+
+    }
+
+    public void getValue (){
+        ObservableList<String> observableList = FXCollections.observableArrayList();
+        observableList.add("ADMIN");
+        observableList.add("USER");
+        jobCmb.setItems(observableList);
+
+
+    }
+    private void clearTxet(){
+        nameText.clear();
+        nicText.clear();
+        emailText.clear();
+        phoneText.clear();
+        passwordText.clear();
+        confirmPassswordText.clear();
+        jobCmb.getItems().clear();
+    }
+    public void loadNextId () {
+        userIdLbl.setText(accountBO.nextId());
+    }
+
+    public void cmbCustomerNameOnAction(ActionEvent event) {
     }
 }

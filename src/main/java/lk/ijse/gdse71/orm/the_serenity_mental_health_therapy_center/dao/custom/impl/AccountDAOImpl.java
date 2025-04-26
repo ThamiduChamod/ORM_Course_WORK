@@ -2,16 +2,24 @@ package lk.ijse.gdse71.orm.the_serenity_mental_health_therapy_center.dao.custom.
 
 import lk.ijse.gdse71.orm.the_serenity_mental_health_therapy_center.config.FactoryConfiguration;
 import lk.ijse.gdse71.orm.the_serenity_mental_health_therapy_center.dao.custom.AccountDAO;
+import lk.ijse.gdse71.orm.the_serenity_mental_health_therapy_center.dto.AccountDTO;
 import lk.ijse.gdse71.orm.the_serenity_mental_health_therapy_center.entity.Account;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 public class AccountDAOImpl implements AccountDAO {
-    FactoryConfiguration factoryConfiguration = FactoryConfiguration.getInstance();
+
+//    private static FactoryConfiguration factory;
 
     @Override
     public boolean save(Account account) {
-        Session session = factoryConfiguration.getSession();
+        System.out.println(account);
+        Session session = FactoryConfiguration.getInstance().getSession();
+
+//        factory = FactoryConfiguration.getInstance();
+//        Session session = factory.getSession();
+//
+////        Session session = factoryConfiguration.getSession();
         try {
             Transaction transaction = session.beginTransaction();
             session.save(account);
@@ -21,6 +29,11 @@ public class AccountDAOImpl implements AccountDAO {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+//        return true;
+    }
 
+    @Override
+    public String getNext() {
+        return "";
     }
 }

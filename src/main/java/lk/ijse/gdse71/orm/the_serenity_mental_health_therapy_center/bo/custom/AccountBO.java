@@ -6,4 +6,5 @@ import lk.ijse.gdse71.orm.the_serenity_mental_health_therapy_center.dto.AccountD
 public interface AccountBO extends SuperBO {
 
     boolean saveUser(AccountDTO createAccountDTO);
+    String nextId ();
 }

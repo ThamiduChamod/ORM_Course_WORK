@@ -9,19 +9,21 @@ import org.hibernate.cfg.Configuration;
 public class FactoryConfiguration {
 
     private static FactoryConfiguration factoryConfiguration;
-    private SessionFactory sessionFactory;
+    public SessionFactory sessionFactory;
 
-    public FactoryConfiguration() {
-        Configuration configuration = new Configuration().configure()
-                .addAnnotatedClass(Account.class)
-                .addAnnotatedClass(Payment.class);
+    private FactoryConfiguration() {
+        Configuration configuration = new Configuration().configure();
+        configuration.addAnnotatedClass(Account.class);
 
         sessionFactory = configuration.buildSessionFactory();
     }
 
-
     public static FactoryConfiguration getInstance() {
-        return (factoryConfiguration == null) ? factoryConfiguration = new FactoryConfiguration() : factoryConfiguration;
+        if (factoryConfiguration == null) {
+            return factoryConfiguration = new FactoryConfiguration();
+
+        }
+        return factoryConfiguration;
     }
 
     public Session getSession() {
