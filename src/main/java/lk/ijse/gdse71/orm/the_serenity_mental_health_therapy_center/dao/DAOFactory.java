@@ -2,6 +2,7 @@ package lk.ijse.gdse71.orm.the_serenity_mental_health_therapy_center.dao;
 
 import lk.ijse.gdse71.orm.the_serenity_mental_health_therapy_center.dao.custom.AccountDAO;
 import lk.ijse.gdse71.orm.the_serenity_mental_health_therapy_center.dao.custom.impl.AccountDAOImpl;
+import lk.ijse.gdse71.orm.the_serenity_mental_health_therapy_center.dao.custom.impl.TherapistDAOImpl;
 
 public class DAOFactory {
 
@@ -13,13 +14,15 @@ public class DAOFactory {
     }
 
     public enum DAOType {
-        Account
+        Account,THERAPIST
     }
 
     public SuperDAO getDAO(DAOType type) {
         switch (type) {
             case Account:
                 return new AccountDAOImpl();
+                case THERAPIST:
+                    return new TherapistDAOImpl();
             default:return null;
         }
 

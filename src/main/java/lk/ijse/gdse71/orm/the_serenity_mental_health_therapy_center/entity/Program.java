@@ -22,11 +22,11 @@ public class Program {
     private String duration;
     private double fee;
 
-    @OneToMany(mappedBy = "program")
-    private List<Patients> patients;
+//    @OneToMany(mappedBy = "program")
+//    private List<Patients> patients;
 
     @OneToMany(mappedBy = "program")
-    private List<Session> session;
+    private List<ProgramSession> session;
 
 
 }

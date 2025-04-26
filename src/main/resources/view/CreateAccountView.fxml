@@ -150,7 +150,11 @@
                               <Insets left="60.0" top="5.0" />
                            </HBox.margin>
                         </Label>
-                        <ComboBox fx:id="jobCmb" onAction="#cmbCustomerNameOnAction" prefWidth="150.0" style="-fx-background-color: #ffffff; -fx-border-color: #7367F0; -fx-border-width: 0 0 1px 0;" />
+                        <ComboBox fx:id="jobCmb" onAction="#jobOnAction" prefHeight="27.0" prefWidth="227.0" style="-fx-background-color: #ffffff; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
+                           <HBox.margin>
+                              <Insets left="12.0" />
+                           </HBox.margin>
+                        </ComboBox>
                      </children>
                      <VBox.margin>
                         <Insets top="20.0" />

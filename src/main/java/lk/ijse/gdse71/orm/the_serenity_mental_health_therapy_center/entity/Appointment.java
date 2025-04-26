@@ -25,6 +25,6 @@ public class Appointment {
 
     @ManyToOne
     @JoinColumn(name = "session_id")
-    private Session session;
+    private ProgramSession session;
 
 }

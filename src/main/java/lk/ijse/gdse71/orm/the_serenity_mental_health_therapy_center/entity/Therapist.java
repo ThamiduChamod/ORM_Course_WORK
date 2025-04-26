@@ -24,6 +24,6 @@ public class Therapist {
     private String phone;
 
     @OneToMany(mappedBy = "therapist")
-    private List<Session> session;
+    private List<ProgramSession> session;
 
 }

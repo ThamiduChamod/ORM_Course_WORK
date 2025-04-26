@@ -27,13 +27,16 @@ public class CreateAccountController implements Initializable {
     public PasswordField passwordText;
     public PasswordField confirmPassswordText;
     public Button registerBtn;
-    public ComboBox jobCmb;
+    public ComboBox<String> jobCmb;
     public AnchorPane createAcountAnchorPane;
     public RadioButton adminRBtn;
     public RadioButton userRBtn;
+    public String jobrool;
 
 
     AccountBO accountBO = (AccountBO) BOFactory.getInstance().getBO(BOFactory.BOType.ACCOUNT);
+
+
 
     public void registerBtnClicked(ActionEvent event) {
 
@@ -56,7 +59,7 @@ public class CreateAccountController implements Initializable {
         boolean isValidNic =nic.matches(nicPattern);
         boolean isValidEmail = email.matches(emailPattern);
         boolean isValidPhone = phone.matches(phonePattern);
-        boolean isSame = passwordText.getText().equals(confirmPassswordText);
+        //boolean isSame = passwordText.getText().equals(confirmPassswordText);
 
 
         if (!isValidName){
@@ -72,14 +75,15 @@ public class CreateAccountController implements Initializable {
             emailText.setStyle(emailText.getStyle() + ";-fx-text-fill: red;");
         }else emailText.setStyle(emailText.getStyle() + ";-fx-text-fill: black;");
 
-        if (isSame){
-
+        if (checkPassword()){
             confirmPassswordText.setStyle(confirmPassswordText.getStyle() + ";-fx-text-fill: black;");
         }else confirmPassswordText.setStyle(confirmPassswordText.getStyle() + ";-fx-text-fill: red;");
 
-        if (isValidName && isValidEmail && isValidPhone && isValidNic && isSame ){
+        if (isValidName && isValidEmail && isValidPhone && isValidNic && checkPassword()){
 //            String pass = BCrypt.withDefaults().hashToString(5, passwordText.getText().toCharArray());
 //            System.out.println(pass);
+
+            System.out.println( jobCmb.getSelectionModel().getSelectedItem());
 
             AccountDTO AccountDTO = new AccountDTO(
                     userIdLbl.getText(),
@@ -87,13 +91,15 @@ public class CreateAccountController implements Initializable {
                     nicText.getText(),
                     emailText.getText(),
                     phoneText.getText(),
-                    jobCmb.getSelectionModel().getSelectedItem().toString(),
+                    jobCmb.getSelectionModel().getSelectedItem(),
                     password
             );
+
 
             try {
                 boolean isSave = accountBO.saveUser(AccountDTO);
                 if (isSave){
+                   loadPage("/view/loginView.fxml",createAcountAnchorPane);
                     new Alert(Alert.AlertType.INFORMATION, "User saved successfully").show();
                 }else new Alert(Alert.AlertType.ERROR, "User save failed").show();
             } catch (Exception e) {
@@ -124,8 +130,9 @@ public class CreateAccountController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loadNextId();
-        getValue();
         clearTxet();
+        getValue();
+
 
     }
 
@@ -144,12 +151,20 @@ public class CreateAccountController implements Initializable {
         phoneText.clear();
         passwordText.clear();
         confirmPassswordText.clear();
-        jobCmb.getItems().clear();
+        jobCmb.getSelectionModel().clearSelection();
+
     }
     public void loadNextId () {
+        System.out.println(accountBO.nextId());
         userIdLbl.setText(accountBO.nextId());
     }
 
-    public void cmbCustomerNameOnAction(ActionEvent event) {
+
+
+    public void jobOnAction(ActionEvent event) {
+
+    }
+    public boolean checkPassword (){
+        return (passwordText.getText()) .equals(confirmPassswordText.getText());
     }
 }

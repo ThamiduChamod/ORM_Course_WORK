@@ -7,13 +7,14 @@ import java.sql.Date;
 import java.sql.Time;
 
 @Entity
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 
-public class Session {
+public class ProgramSession {
 
     @Id
     private String id;
