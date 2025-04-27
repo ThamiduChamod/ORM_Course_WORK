@@ -18,10 +18,13 @@
                <children>
                   <VBox prefHeight="200.0" prefWidth="683.0">
                      <children>
-                        <TableView prefHeight="225.0" prefWidth="633.0">
+                        <TableView fx:id="shedualTable" onMouseClicked="#scheduleTableOnaction" prefHeight="225.0" prefWidth="633.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="C1" />
-                            <TableColumn prefWidth="75.0" text="C2" />
+                            <TableColumn minWidth="0.0" prefWidth="0.0" />
+                            <TableColumn fx:id="tableSId" prefWidth="150.0" text="Schedule Id" />
+                              <TableColumn fx:id="tableDate" prefWidth="172.0" text="Date" />
+                              <TableColumn fx:id="tableSTime" minWidth="0.0" prefWidth="156.0" text="Start Time" />
+                              <TableColumn fx:id="tableETime" minWidth="2.0" prefWidth="153.0" text="End Time" />
                           </columns>
                            <VBox.margin>
                               <Insets left="50.0" top="50.0" />
@@ -38,12 +41,7 @@
                                     <Insets left="50.0" />
                                  </HBox.margin>
                               </Label>
-                              <Label prefHeight="17.0" prefWidth="82.0" text="1" />
-                              <Label prefHeight="17.0" prefWidth="189.0" text="Label">
-                                 <HBox.margin>
-                                    <Insets left="20.0" />
-                                 </HBox.margin>
-                              </Label>
+                              <Label fx:id="appoinmentIdLbl" prefHeight="17.0" prefWidth="82.0" text="1" />
                            </children>
                            <VBox.margin>
                               <Insets top="80.0" />
@@ -56,27 +54,28 @@
                                     <Insets left="50.0" />
                                  </HBox.margin>
                               </Label>
-                              <ComboBox prefHeight="25.0" prefWidth="162.0" />
-                              <Label text="Patients Name">
+                              <ComboBox fx:id="patientsIdCmb" onAction="#pationIdOnAction" prefHeight="25.0" prefWidth="162.0" />
+                              <Label prefHeight="17.0" prefWidth="94.0" text="Patients Name">
                                  <HBox.margin>
                                     <Insets left="30.0" />
                                  </HBox.margin>
                               </Label>
+                              <Label fx:id="patienNameLbl" prefHeight="17.0" prefWidth="135.0" />
                            </children>
                         </HBox>
                         <HBox prefHeight="60.0" prefWidth="683.0">
                            <children>
-                              <Button mnemonicParsing="false" text="Button">
+                              <Button mnemonicParsing="false" text="Delete">
                                  <HBox.margin>
                                     <Insets left="430.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button mnemonicParsing="false" text="Button">
+                              <Button mnemonicParsing="false" text="Update">
                                  <HBox.margin>
                                     <Insets left="10.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button mnemonicParsing="false" text="Button">
+                              <Button mnemonicParsing="false" onAction="#saveBtnOnAction" text="Save">
                                  <HBox.margin>
                                     <Insets left="10.0" />
                                  </HBox.margin>

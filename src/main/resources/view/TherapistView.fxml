@@ -114,13 +114,13 @@
                      <children>
                         <HBox prefHeight="33.0" prefWidth="683.0">
                            <children>
-                              <Button mnemonicParsing="false" text="Button">
+                              <Button mnemonicParsing="false" text="Delete">
                                  <HBox.margin>
                                     <Insets left="450.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button mnemonicParsing="false" text="Button" />
-                              <Button mnemonicParsing="false" onAction="#saveBtnOnAction" text="Button" />
+                              <Button mnemonicParsing="false" text="Update" />
+                              <Button mnemonicParsing="false" onAction="#saveBtnOnAction" text="Save" />
                            </children>
                            <VBox.margin>
                               <Insets top="200.0" />
@@ -130,11 +130,17 @@
                   </VBox>
                </children>
             </HBox>
-            <TableView prefHeight="434.0" prefWidth="1366.0">
+            <TableView fx:id="therapistTable" onMouseClicked="#therapistTableOnAction" prefHeight="434.0" prefWidth="1366.0">
                <columns>
-                  <TableColumn prefWidth="75.0" text="C1" />
-                  <TableColumn prefWidth="75.0" text="C2" />
+                  <TableColumn fx:id="tableId" prefWidth="209.66667938232422" text="ID" />
+                  <TableColumn fx:id="tableName" prefWidth="382.6666564941406" text="Name" />
+                  <TableColumn fx:id="tableNic" prefWidth="230.3333740234375" text="NIC" />
+                  <TableColumn fx:id="tableEmail" prefWidth="218.6666259765625" text="Email" />
+                  <TableColumn fx:id="tablePhone" prefWidth="226.33331298828125" text="Phone" />
                </columns>
+               <VBox.margin>
+                  <Insets left="50.0" right="50.0" />
+               </VBox.margin>
             </TableView>
          </children>
       </VBox>

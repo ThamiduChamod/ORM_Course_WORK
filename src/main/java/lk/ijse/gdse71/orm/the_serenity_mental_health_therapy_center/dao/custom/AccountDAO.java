@@ -12,4 +12,5 @@ public interface AccountDAO extends CrudDAO<Account> {
     public boolean findUser(String username);
     public List<String> findPasswordByUsername(String username);
     public List<Account> getALLByUserName(String UserName);
+    public List<String> getJobRollByUsername (String username);
 }

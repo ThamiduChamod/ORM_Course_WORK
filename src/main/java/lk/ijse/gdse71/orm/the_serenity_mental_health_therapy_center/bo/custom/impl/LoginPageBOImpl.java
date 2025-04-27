@@ -38,6 +38,14 @@ public class LoginPageBOImpl implements LoginpageBO {
 
         }
         return false;
+    }
+
+    public String getJobRollByUsername(String username) {
+
+        List<String> jobRollByUsername = accountDAO.getJobRollByUsername(username);
+        jobRollByUsername.forEach(System.out::println);
+
+        return jobRollByUsername.getFirst();
 
 
     }

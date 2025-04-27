@@ -30,31 +30,51 @@
                               <Font size="18.0" />
                            </font>
                         </Text>
-                        <Button mnemonicParsing="false" onAction="#patientOnAction" prefHeight="37.0" prefWidth="130.0" text="Patient">
+                        <Button fx:id="patientBtn" mnemonicParsing="false" onAction="#patientOnAction" prefHeight="37.0" prefWidth="130.0" text="Patient">
                            <HBox.margin>
                               <Insets left="20.0" top="20.0" />
                            </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#therapistOnAction" prefHeight="37.0" prefWidth="130.0" text="Therapist">
+                        <Button fx:id="TherapistBtn" mnemonicParsing="false" onAction="#therapistOnAction" prefHeight="37.0" prefWidth="130.0" text="Therapist">
                            <HBox.margin>
                               <Insets top="20.0" />
                            </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#programbtnOnAction" prefHeight="37.0" prefWidth="130.0" text="Therapy Programs">
+                        <Button fx:id="programBtn" mnemonicParsing="false" onAction="#programbtnOnAction" prefHeight="37.0" prefWidth="130.0" text="Therapy Programs">
                            <HBox.margin>
                               <Insets top="20.0" />
                            </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#ssheduleBtnOnAction" prefHeight="37.0" prefWidth="130.0" text="Schedules">
+                        <Button fx:id="scheduleBtn" mnemonicParsing="false" onAction="#ssheduleBtnOnAction" prefHeight="37.0" prefWidth="130.0" text="Schedules">
                            <HBox.margin>
                               <Insets top="20.0" />
                            </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#appoinmentBtnOnAction" prefHeight="37.0" prefWidth="130.0" text="Appoinments">
+                        <Button fx:id="appoinmentBtn" mnemonicParsing="false" onAction="#appoinmentBtnOnAction" prefHeight="37.0" prefWidth="130.0" text="Appoinments">
                            <HBox.margin>
                               <Insets top="20.0" />
                            </HBox.margin>
                         </Button>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#logoutOnAction" prefHeight="39.0" prefWidth="101.0" style="-fx-background-color: #44e3ae;" text="Logout">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Button>
+                              <Label fx:id="joblble" prefHeight="17.0" prefWidth="102.0" text="Label" textAlignment="CENTER">
+                                 <VBox.margin>
+                                    <Insets left="20.0" top="5.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <HBox.margin>
+                              <Insets left="270.0" />
+                           </HBox.margin>
+                        </VBox>
                      </children>
                   </HBox>
                </children>
@@ -228,10 +248,13 @@
                               </VBox>
                            </children>
                         </HBox>
-                        <TableView prefHeight="428.0" prefWidth="1366.0">
+                        <TableView fx:id="patientTable" onMouseClicked="#patientTableOnAction" prefHeight="428.0" prefWidth="1366.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="C1" />
-                            <TableColumn prefWidth="75.0" text="C2" />
+                            <TableColumn fx:id="tableId" prefWidth="231.0" text="ID" />
+                            <TableColumn fx:id="tableName" prefWidth="317.0" text="NAME" />
+                              <TableColumn fx:id="tableNic" prefWidth="229.0" text="NIC" />
+                              <TableColumn fx:id="tableEmail" prefWidth="253.0" text="Email" />
+                              <TableColumn fx:id="tablePhone" prefWidth="235.0" text="Phone" />
                           </columns>
                            <VBox.margin>
                               <Insets left="50.0" right="50.0" />

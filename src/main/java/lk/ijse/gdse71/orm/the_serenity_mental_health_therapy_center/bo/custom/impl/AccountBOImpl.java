@@ -30,6 +30,7 @@ public class AccountBOImpl  implements AccountBO {
                 createAccountDTO.getPassword()
         ), session);
         transaction.commit();
+        session.close();
         return save;
 
 

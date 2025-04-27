@@ -23,7 +23,7 @@ public class Patients {
    private String email;
    private String phone;
 
-   @OneToOne
+   @OneToOne(mappedBy = "patient")
    private Payment payment;
 
    @OneToMany(mappedBy = "patient") //map karagena innawa appoinment ekapaththe inna patient

@@ -19,7 +19,8 @@ public class ProgramSession {
     @Id
     private String id;
     private Date date;
-    private Time time;
+    private String stime;
+    private String eTime;
 
     @ManyToOne
     @JoinColumn(name = "program_id")

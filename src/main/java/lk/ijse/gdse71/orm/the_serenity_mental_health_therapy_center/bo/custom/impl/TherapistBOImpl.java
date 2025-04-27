@@ -4,11 +4,15 @@ import lk.ijse.gdse71.orm.the_serenity_mental_health_therapy_center.bo.custom.Th
 import lk.ijse.gdse71.orm.the_serenity_mental_health_therapy_center.config.FactoryConfiguration;
 import lk.ijse.gdse71.orm.the_serenity_mental_health_therapy_center.dao.DAOFactory;
 import lk.ijse.gdse71.orm.the_serenity_mental_health_therapy_center.dao.custom.TherapistDAO;
+import lk.ijse.gdse71.orm.the_serenity_mental_health_therapy_center.dto.PatientDTO;
 import lk.ijse.gdse71.orm.the_serenity_mental_health_therapy_center.dto.TherapistDTO;
+import lk.ijse.gdse71.orm.the_serenity_mental_health_therapy_center.entity.Patients;
 import lk.ijse.gdse71.orm.the_serenity_mental_health_therapy_center.entity.Therapist;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class TherapistBOImpl implements TherapistBO {
@@ -42,13 +46,33 @@ public class TherapistBOImpl implements TherapistBO {
         therapist.setEmail(therapistDTO.getEmail());
         therapist.setPhone(therapistDTO.getPhone());
 
+
+
         Transaction transaction = session.beginTransaction();
 
         boolean save = therapistDAO.save(therapist, session);
 
         transaction.commit();
-        session.close();
+
         return save;
 
+    }
+
+    public List<TherapistDTO> loadTable() {
+        List<Therapist> patient = therapistDAO.getAll();
+
+        List<TherapistDTO> dtos = new ArrayList<>();
+
+        for (Therapist patients : patient) {
+            TherapistDTO dto = new TherapistDTO(
+                    patients.getId(),
+                    patients.getName(),
+                    patients.getNic(),
+                    patients.getEmail(),
+                    patients.getPhone()
+            );
+            dtos.add(dto);
+        }
+        return dtos;
     }
 }

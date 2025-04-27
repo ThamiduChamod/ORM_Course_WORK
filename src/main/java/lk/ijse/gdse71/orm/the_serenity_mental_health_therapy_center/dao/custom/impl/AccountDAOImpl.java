@@ -16,7 +16,7 @@ public class AccountDAOImpl implements AccountDAO {
 //    private static FactoryConfiguration factory;
 
     @Override
-    public boolean save(Account account,Session session) {
+    public boolean save(Account account, Session session) {
         System.out.println(account);
 
 
@@ -25,10 +25,7 @@ public class AccountDAOImpl implements AccountDAO {
 //
 ////        Session session = factoryConfiguration.getSession();
         try {
-            Transaction transaction = session.beginTransaction();
             session.save(account);
-            transaction.commit();
-            session.close();
             return true;
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -52,6 +49,11 @@ public class AccountDAOImpl implements AccountDAO {
 
     }
 
+    @Override
+    public List<Account> getAll() {
+        return List.of();
+    }
+
     public boolean findUser(String username) {
         System.out.println(username);
 
@@ -64,9 +66,9 @@ public class AccountDAOImpl implements AccountDAO {
             usernameList = query.getResultList();
             session.close();
 
-            if (usernameList.isEmpty()){
+            if (usernameList.isEmpty()) {
                 return false;
-            }else return true;
+            } else return true;
 
 
         } catch (Exception e) {
@@ -97,4 +99,28 @@ public class AccountDAOImpl implements AccountDAO {
         return session.createQuery("FROM Account WHERE name = :username", Account.class)
                 .setParameter("username", UserName)
                 .list();
-    }}
+    }
+
+    public List<String> getJobRollByUsername (String username){
+        Session session = FactoryConfiguration.getInstance().getSession();
+        List<String> passwordList = new ArrayList<>();
+        try {
+            Query<String> query = session.createQuery("SELECT a.jobTitle FROM Account a WHERE a.name = :name", String.class);
+            query.setParameter("name", username);
+
+            passwordList = query.getResultList();
+            session.close();
+            return passwordList;
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+}
+
+
+
+
+

@@ -1,9 +1,7 @@
 package lk.ijse.gdse71.orm.the_serenity_mental_health_therapy_center.bo;
 
 import lk.ijse.gdse71.orm.the_serenity_mental_health_therapy_center.bo.custom.AccountBO;
-import lk.ijse.gdse71.orm.the_serenity_mental_health_therapy_center.bo.custom.impl.AccountBOImpl;
-import lk.ijse.gdse71.orm.the_serenity_mental_health_therapy_center.bo.custom.impl.LoginPageBOImpl;
-import lk.ijse.gdse71.orm.the_serenity_mental_health_therapy_center.bo.custom.impl.TherapistBOImpl;
+import lk.ijse.gdse71.orm.the_serenity_mental_health_therapy_center.bo.custom.impl.*;
 
 public class BOFactory {
 
@@ -15,7 +13,7 @@ public class BOFactory {
     }
 
     public enum BOType{
-        ACCOUNT,LOGIN,THERAPIST
+        ACCOUNT,LOGIN,THERAPIST,PROGRAM,SCHEDULE,PATIENT,APPOINTMENT
     }
 
     public SuperBO getBO(BOType type){
@@ -26,6 +24,14 @@ public class BOFactory {
                     return new LoginPageBOImpl();
             case THERAPIST:
                 return new TherapistBOImpl();
+                case PROGRAM:
+                    return new ProgramBOImpl();
+                    case SCHEDULE:
+                        return new ScheduleBOImpl();
+                        case PATIENT:
+                            return new PatientBOImpl();
+                            case APPOINTMENT:
+                                return new AppointmentBOImpl();
                 default:
                     return null;
         }

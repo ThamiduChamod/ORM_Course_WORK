@@ -47,6 +47,9 @@ public class LoginController {
         // Step 1: Check if the username exists
         if (loginpageBO.searchUser(username)) {
             System.out.println("bbbbb");
+
+            String jobRollByUsername = loginpageBO.getJobRollByUsername(username);
+            System.out.println(jobRollByUsername);
             // Step 2: Check if the entered password matches the stored password
 
 
@@ -55,15 +58,26 @@ public class LoginController {
             if (loginpageBO.checkPassword(enteredPassword,username) ) {
                 System.out.println("aaaaa");
                 try {
-                    AnchorPane load = FXMLLoader.load(getClass().getResource("/view/MainView.fxml"));
+//                    AnchorPane load = FXMLLoader.load(getClass().getResource("/view/MainView.fxml"));
+//                    loginAnchorpPane.getChildren().clear();
+//                    loginAnchorpPane.getChildren().add(load);
+//                    MainPageController controller = loader.getController();
+//                    controller.setData(jobRollByUsername);
+
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/MainView.fxml"));
+                    AnchorPane load = loader.load();
                     loginAnchorpPane.getChildren().clear();
                     loginAnchorpPane.getChildren().add(load);
+                    MainPageController controller = loader.getController();
+                    controller.setData(jobRollByUsername);
+
+
 
 //                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/MainLayout.fxml"));
 //                    Parent load = loader.load(); // Load and get the root node
 //
 //                    MainPageController controller = loader.getController();
-//                    controller.setData(job);
+//                    controller.setData(jobRollByUsername);
 //
 //                    loginAnchorpPane.getChildren().clear();
 //                    loginAnchorpPane.getChildren().add(load);

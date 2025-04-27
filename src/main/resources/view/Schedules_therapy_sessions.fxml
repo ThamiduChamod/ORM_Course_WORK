@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <AnchorPane prefHeight="672.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse71.orm.the_serenity_mental_health_therapy_center.controller.ScheduleController">
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -23,10 +22,12 @@
                      <children>
                         <VBox prefHeight="330.0" prefWidth="687.0">
                            <children>
-                              <TableView prefHeight="266.0" prefWidth="683.0">
+                              <TableView fx:id="programTable" onMouseClicked="#tableOnAction" prefHeight="266.0" prefWidth="683.0">
                                 <columns>
-                                  <TableColumn prefWidth="75.0" text="C1" />
-                                  <TableColumn prefWidth="75.0" text="C2" />
+                                  <TableColumn fx:id="tableId" prefWidth="114.33332824707031" text="program ID" />
+                                  <TableColumn fx:id="tabaleName" prefWidth="252.6666717529297" text="Program Name" />
+                                    <TableColumn fx:id="tableDuration" prefWidth="131.0" text="Duration" />
+                                    <TableColumn fx:id="tableFee" prefWidth="137.0" text="Fee (LKR)" />
                                 </columns>
                                  <VBox.margin>
                                     <Insets left="50.0" />
@@ -47,10 +48,29 @@
                                           <Insets left="50.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <Label text="1" />
+                                    <Label fx:id="sessionIdLbl" prefHeight="17.0" prefWidth="83.0" text="1" />
                                  </children>
                                  <VBox.margin>
-                                    <Insets top="50.0" />
+                                    <Insets top="30.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox prefHeight="24.0" prefWidth="583.0">
+                                 <children>
+                                    <Label prefHeight="17.0" prefWidth="65.0" text="Therapist">
+                                       <HBox.margin>
+                                          <Insets left="50.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <ComboBox fx:id="therapistIdCmb" onAction="#therapistNameOnAction" prefHeight="25.0" prefWidth="256.0" />
+                                    <Label prefHeight="17.0" prefWidth="90.0" text="Therapist Name">
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Label fx:id="therapistNameLbl" prefHeight="17.0" prefWidth="152.0" text="1" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
                                  </VBox.margin>
                               </HBox>
                               <HBox prefHeight="25.0" prefWidth="583.0">
@@ -60,7 +80,7 @@
                                           <Insets left="50.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <DatePicker fx:id="datePiker" />
+                                    <DatePicker fx:id="datePiker" prefHeight="25.0" prefWidth="256.0" />
                                  </children>
                                  <VBox.margin>
                                     <Insets top="20.0" />
@@ -73,8 +93,8 @@
                                           <Insets left="50.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <TextField fx:id="sTimeText" />
-                                    <ComboBox fx:id="am1cmb" prefHeight="25.0" prefWidth="34.0">
+                                    <TextField fx:id="sTimeText" prefHeight="25.0" prefWidth="199.0" />
+                                    <ComboBox fx:id="am1cmb" prefHeight="25.0" prefWidth="91.0">
                                        <HBox.margin>
                                           <Insets left="10.0" />
                                        </HBox.margin>
@@ -84,15 +104,15 @@
                                     <Insets top="20.0" />
                                  </VBox.margin>
                               </HBox>
-                              <HBox prefHeight="56.0" prefWidth="683.0">
+                              <HBox prefHeight="35.0" prefWidth="683.0">
                                  <children>
                                     <Label prefHeight="17.0" prefWidth="65.0" text="End Time">
                                        <HBox.margin>
                                           <Insets left="50.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <TextField fx:id="eTimeText" />
-                                    <ComboBox fx:id="am2Cmb" prefHeight="25.0" prefWidth="34.0">
+                                    <TextField fx:id="eTimeText" prefHeight="25.0" prefWidth="200.0" />
+                                    <ComboBox fx:id="am2Cmb" prefHeight="25.0" prefWidth="89.0">
                                        <HBox.margin>
                                           <Insets left="10.0" />
                                        </HBox.margin>
@@ -104,17 +124,17 @@
                               </HBox>
                               <HBox prefHeight="87.0" prefWidth="683.0">
                                  <children>
-                                    <Button mnemonicParsing="false" text="Button">
+                                    <Button mnemonicParsing="false" text="Delete">
                                        <HBox.margin>
                                           <Insets left="430.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" text="Button">
+                                    <Button mnemonicParsing="false" text="Update">
                                        <HBox.margin>
                                           <Insets left="10.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" onAction="#saveBtnOnAction" text="Button">
+                                    <Button mnemonicParsing="false" onAction="#saveBtnOnAction" text="Save">
                                        <HBox.margin>
                                           <Insets left="10.0" />
                                        </HBox.margin>
@@ -130,10 +150,14 @@
                   <Insets top="50.0" />
                </VBox.margin>
             </HBox>
-            <TableView prefHeight="288.0" prefWidth="1266.0">
+            <TableView fx:id="sheduleTable" onMouseClicked="#scheduleTableOnAction" prefHeight="288.0" prefWidth="1266.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn fx:id="tableSiD" prefWidth="162.0" text="Schedule Id" />
+                <TableColumn fx:id="tablePId" prefWidth="197.0" text="ProgramId" />
+                  <TableColumn fx:id="tabaleTId" prefWidth="235.0" text="Therapist Id" />
+                  <TableColumn fx:id="tableDate" prefWidth="188.0" text="Date" />
+                  <TableColumn fx:id="tableSTime" prefWidth="301.0" text="Start Time" />
+                  <TableColumn fx:id="tableETime" prefWidth="187.0" text="Eend Time" />
               </columns>
                <VBox.margin>
                   <Insets left="50.0" right="50.0" />
